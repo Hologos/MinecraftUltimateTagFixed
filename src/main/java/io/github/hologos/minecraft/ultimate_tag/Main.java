@@ -75,6 +75,7 @@ public class Main extends JavaPlugin implements Listener {
             this.not.setHealth(20.0D);
             this.hunter.setFoodLevel(30);
             this.not.setFoodLevel(30);
+            this.hunter.getInventory().setHeldItemSlot(4); // force to start with compass selected
             this.x = this.getRand();
             this.z = this.getRand();
             p.getWorld().getWorldBorder().setCenter((double)this.x, (double)this.z);
