@@ -73,8 +73,8 @@ public class Main extends JavaPlugin implements Listener {
             this.not = this.getServer().getPlayer(this.hunterNum);
             this.hunter.setHealth(20.0D);
             this.not.setHealth(20.0D);
-            this.hunter.setFoodLevel(20);
-            this.not.setFoodLevel(20);
+            this.hunter.setFoodLevel(30);
+            this.not.setFoodLevel(30);
             this.x = this.getRand();
             this.z = this.getRand();
             p.getWorld().getWorldBorder().setCenter((double)this.x, (double)this.z);
@@ -321,6 +321,7 @@ public class Main extends JavaPlugin implements Listener {
     protected Location[] generatePlayersLocations(final Player p, boolean test) {
         Location hl, tl;
         double distance, x1, x2, z1, z2;
+        boolean unsatisfactoryDistance;
 
         // fix hunter's location in place
         hl = this.getRandomLocation(p);
@@ -337,10 +338,24 @@ public class Main extends JavaPlugin implements Listener {
             z2 = tl.getZ();
             distance = Math.hypot(Math.abs(z2 - z1), Math.abs(x2 - x1));
 
+            unsatisfactoryDistance = distance > this.maxStartingDistance || distance < this.minStartingDistance;
+
             if(test) {
                 p.sendMessage("Target location: x=" + x2 + ", z=" + z2);
             }
-        } while (distance > this.maxStartingDistance || distance < this.minStartingDistance);
+
+            String message;
+
+            if(unsatisfactoryDistance) {
+                message = ChatColor.RED + "" + ChatColor.BOLD + "Not suitable target't location ("+ this.minStartingDistance
+                        +" < " + ((int) distance) + " < "+ this.maxStartingDistance +") - generating new one.";
+            } else {
+                message = ChatColor.GREEN + "" + ChatColor.BOLD + "Suitable location found.";
+            }
+
+            this.hunter.sendMessage(message);
+            this.not.sendMessage(message);
+        } while (unsatisfactoryDistance);
 
         return new Location[] { hl, tl };
     }
@@ -362,7 +377,7 @@ public class Main extends JavaPlugin implements Listener {
         Location[] locations = this.generatePlayersLocations(p, true);
 
         this.hunter.teleport(locations[0]);
-        p.getWorld().spawnEntity(locations[1], EntityType.BOAT);
+        p.getWorld().spawnEntity(locations[1], EntityType.BLAZE);
         p.setCompassTarget(locations[1]);
     }
 }
