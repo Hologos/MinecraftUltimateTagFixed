@@ -2,7 +2,7 @@
 
 This is a decompiled plugin [by Willbob2004](https://www.spigotmc.org/resources/minecraft-ultimate-tag.77908/), which contained a lot a bugs.
 
-I fixed them and share them so others can enjoy this as well.
+I fixed them and share this so others can enjoy this as well.
 
 ## Dislaimer
 
