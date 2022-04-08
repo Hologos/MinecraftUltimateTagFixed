@@ -174,9 +174,7 @@ public class Main extends JavaPlugin implements Listener {
             }, 2380L);
             this.getServer().getScheduler().runTaskLater(this, new Runnable() {
                 public void run() {
-                    p.getWorld().getWorldBorder().reset();
-                    Main.this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + Main.this.not.getDisplayName() + " has won this round!");
-                    Main.this.not.sendMessage("" + ChatColor.RED + ChatColor.BOLD + Main.this.not.getDisplayName() + " has won this round!");
+                    Main.this.endRound(p, Main.this.not);
                 }
             }, 2400L);
         }
@@ -193,10 +191,7 @@ public class Main extends JavaPlugin implements Listener {
                         Player d = (Player)e.getDamager();
                         if (p.getUniqueId() == this.not.getUniqueId()) {
                             if (d.getUniqueId() == this.hunter.getUniqueId()) {
-                                this.getServer().getScheduler().cancelTasks(this);
-                                p.getWorld().getWorldBorder().reset();
-                                this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + this.hunter.getDisplayName() + " has won this round!");
-                                this.not.sendMessage("" + ChatColor.RED + ChatColor.BOLD + this.hunter.getDisplayName() + " has won this round!");
+                                this.endRound(p, this.hunter);
                             }
                         }
                     }
@@ -266,16 +261,10 @@ public class Main extends JavaPlugin implements Listener {
                 if (e.getEntity() instanceof Player) {
                     Player p = (Player)e.getEntity();
                     if (p.getUniqueId() == this.hunter.getUniqueId()) {
-                        this.getServer().getScheduler().cancelTasks(this);
-                        p.getWorld().getWorldBorder().reset();
-                        this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + this.not.getDisplayName() + " has won this round!");
-                        this.not.sendMessage("" + ChatColor.RED + ChatColor.BOLD + this.not.getDisplayName() + " has won this round!");
+                        this.endRound(p, this.not);
                     } else {
                         if (p.getUniqueId() == this.not.getUniqueId()) {
-                            this.getServer().getScheduler().cancelTasks(this);
-                            p.getWorld().getWorldBorder().reset();
-                            this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + this.hunter.getDisplayName() + " has won this round!");
-                            this.not.sendMessage("" + ChatColor.RED + ChatColor.BOLD + this.hunter.getDisplayName() + " has won this round!");
+                            this.endRound(p, this.hunter);
                         }
 
                     }
@@ -380,5 +369,14 @@ public class Main extends JavaPlugin implements Listener {
         this.hunter.teleport(locations[0]);
         p.getWorld().spawnEntity(locations[1], EntityType.BLAZE);
         p.setCompassTarget(locations[1]);
+    }
+
+    public void endRound(Player p, Player winner) {
+        String message = ChatColor.RED + "" + ChatColor.BOLD + winner.getDisplayName() + " has won this round!";
+        this.hunter.sendMessage(message);
+        this.not.sendMessage(message);
+
+        this.getServer().getScheduler().cancelTasks(this);
+        p.getWorld().getWorldBorder().reset();
     }
 }
