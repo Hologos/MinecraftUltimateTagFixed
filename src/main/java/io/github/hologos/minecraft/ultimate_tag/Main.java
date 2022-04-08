@@ -192,7 +192,10 @@ public class Main extends JavaPlugin implements Listener {
     }
 
     public void helpMenu(Player p) {
-        p.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "Minecraft Ultimate Tag Commands: \n" + ChatColor.RED + "-- /tag help" + ChatColor.WHITE + " - shows this\n" + ChatColor.RED + "-- /tag start <hunter> <target>" + ChatColor.WHITE + " - starts new game\n" + ChatColor.RED + "-- /tag nextRound" + ChatColor.WHITE + " - starts next round");
+        p.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "Minecraft Ultimate Tag Commands: \n"
+            + ChatColor.RED + "-- /tag help" + ChatColor.WHITE + " - shows this\n"
+            + ChatColor.RED + "-- /tag start <hunter> <target>" + ChatColor.WHITE + " - starts new game\n"
+            + ChatColor.RED + "-- /tag nextRound" + ChatColor.WHITE + " - starts next round");
     }
 
     public void startGame(String h, String n, Player p) {
