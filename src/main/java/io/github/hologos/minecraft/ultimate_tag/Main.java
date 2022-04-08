@@ -29,7 +29,10 @@ public class Main extends JavaPlugin implements Listener {
     public int z;
     public FileConfiguration config;
 
+    protected int playgroundSize;
+
     public Main() {
+        this.playgroundSize = 160;
     }
 
     public void onEnable() {
@@ -69,7 +72,7 @@ public class Main extends JavaPlugin implements Listener {
             this.x = this.getRand();
             this.z = this.getRand();
             p.getWorld().getWorldBorder().setCenter((double)this.x, (double)this.z);
-            p.getWorld().getWorldBorder().setSize(160.0D);
+            p.getWorld().getWorldBorder().setSize(this.playgroundSize);
             this.hunter.teleport(p.getWorld().getHighestBlockAt(this.x + 80 - 1, this.z + 80 - 1).getLocation());
             this.not.teleport(p.getWorld().getHighestBlockAt(this.x + 80 - 1, this.z + 80 - 1).getLocation());
             this.not.getInventory().setContents(this.notInv);
