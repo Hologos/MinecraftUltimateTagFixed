@@ -347,7 +347,7 @@ public class Main extends JavaPlugin implements Listener {
             String message;
 
             if(unsatisfactoryDistance) {
-                message = ChatColor.RED + "" + ChatColor.BOLD + "Not suitable target't location ("+ this.minStartingDistance
+                message = ChatColor.RED + "" + ChatColor.BOLD + "Not suitable target's location ("+ this.minStartingDistance
                         +" < " + ((int) distance) + " < "+ this.maxStartingDistance +") - generating new one.";
             } else {
                 message = ChatColor.GREEN + "" + ChatColor.BOLD + "Suitable location found.";
