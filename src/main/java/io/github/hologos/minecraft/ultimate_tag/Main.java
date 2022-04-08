@@ -161,8 +161,8 @@ public class Main extends JavaPlugin implements Listener {
             this.getServer().getScheduler().runTaskLater(this, new Runnable() {
                 public void run() {
                     p.getWorld().getWorldBorder().reset();
-                    Main.this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + Main.this.not.getDisplayName() + "has won this round!");
-                    Main.this.not.sendMessage("" + ChatColor.RED + ChatColor.BOLD + Main.this.not.getDisplayName() + "has won this round!");
+                    Main.this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + Main.this.not.getDisplayName() + " has won this round!");
+                    Main.this.not.sendMessage("" + ChatColor.RED + ChatColor.BOLD + Main.this.not.getDisplayName() + " has won this round!");
                 }
             }, 2400L);
         }
@@ -181,8 +181,8 @@ public class Main extends JavaPlugin implements Listener {
                             if (d.getUniqueId() == this.hunter.getUniqueId()) {
                                 this.getServer().getScheduler().cancelTasks(this);
                                 p.getWorld().getWorldBorder().reset();
-                                this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + this.hunter.getDisplayName() + "has won this round!");
-                                this.not.sendMessage("" + ChatColor.RED + ChatColor.BOLD + this.hunter.getDisplayName() + "has won this round!");
+                                this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + this.hunter.getDisplayName() + " has won this round!");
+                                this.not.sendMessage("" + ChatColor.RED + ChatColor.BOLD + this.hunter.getDisplayName() + " has won this round!");
                             }
                         }
                     }
@@ -253,14 +253,14 @@ public class Main extends JavaPlugin implements Listener {
                     if (p.getUniqueId() == this.hunter.getUniqueId()) {
                         this.getServer().getScheduler().cancelTasks(this);
                         p.getWorld().getWorldBorder().reset();
-                        this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + this.not.getDisplayName() + "has won this round!");
-                        this.not.sendMessage("" + ChatColor.RED + ChatColor.BOLD + this.not.getDisplayName() + "has won this round!");
+                        this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + this.not.getDisplayName() + " has won this round!");
+                        this.not.sendMessage("" + ChatColor.RED + ChatColor.BOLD + this.not.getDisplayName() + " has won this round!");
                     } else {
                         if (p.getUniqueId() == this.not.getUniqueId()) {
                             this.getServer().getScheduler().cancelTasks(this);
                             p.getWorld().getWorldBorder().reset();
-                            this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + this.hunter.getDisplayName() + "has won this round!");
-                            this.not.sendMessage("" + ChatColor.RED + ChatColor.BOLD + this.hunter.getDisplayName() + "has won this round!");
+                            this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + this.hunter.getDisplayName() + " has won this round!");
+                            this.not.sendMessage("" + ChatColor.RED + ChatColor.BOLD + this.hunter.getDisplayName() + " has won this round!");
                         }
 
                     }
