@@ -1,5 +1,7 @@
 package io.github.hologos.minecraft.ultimate_tag;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import org.bukkit.ChatColor;
@@ -35,10 +37,16 @@ public class Main extends JavaPlugin implements Listener {
     protected int maxStartingDistance;
     protected int minStartingDistance;
 
+    protected int winScore;
+    protected boolean activeRound;
+
+    protected Map<UUID, Integer> scores = new HashMap<>();
+
     public Main() {
         this.playgroundSize = 160;
         this.minStartingDistance = 20;
         this.maxStartingDistance = 60;
+        this.winScore = 5;
     }
 
     public void onEnable() {
@@ -85,6 +93,7 @@ public class Main extends JavaPlugin implements Listener {
         this.setPlayersPositions(p);
         this.not.getInventory().setContents(this.notInv);
         this.hunter.getInventory().setContents(this.hunterInv);
+        this.activeRound = true;
 
         if(test) {
             this.enableTest(p);
@@ -176,7 +185,7 @@ public class Main extends JavaPlugin implements Listener {
         }, 2380L);
         this.getServer().getScheduler().runTaskLater(this, new Runnable() {
             public void run() {
-                Main.this.endRound(p, Main.this.not);
+                Main.this.endRound(p, Main.this.not, true, false);
             }
         }, 2400L);
     }
@@ -198,7 +207,7 @@ public class Main extends JavaPlugin implements Listener {
             return;
         }
 
-        this.endRound(p, this.hunter);
+        this.endRound(p, this.hunter, false, false);
     }
 
     public void helpMenu(Player p) {
@@ -222,6 +231,9 @@ public class Main extends JavaPlugin implements Listener {
         this.hunter = this.getServer().getPlayer(n);
         this.not = this.getServer().getPlayer(h);
         this.inGame = true;
+        this.scores.clear();
+        this.scores.put(this.getServer().getPlayer(h).getUniqueId(), 0);
+        this.scores.put(this.getServer().getPlayer(n).getUniqueId(), 0);
         this.nextGame(p, test);
     }
 
@@ -243,9 +255,9 @@ public class Main extends JavaPlugin implements Listener {
         }
 
         if (uuid == this.hunter.getUniqueId()) {
-            this.endGame(p, this.not);
+            this.endRound(p, this.not, true, true);
         } else if (uuid == this.not.getUniqueId()) {
-            this.endGame(p, this.hunter);
+            this.endRound(p, this.hunter, true, true);
         }
     }
 
@@ -285,9 +297,9 @@ public class Main extends JavaPlugin implements Listener {
         UUID uuid = p.getUniqueId();
 
         if (uuid == this.hunter.getUniqueId()) {
-            this.endRound(p, this.not);
+            this.endRound(p, this.not, false, false);
         } else if (uuid == this.not.getUniqueId()) {
-            this.endRound(p, this.hunter);
+            this.endRound(p, this.hunter, true, false);
         }
     }
 
@@ -409,17 +421,52 @@ public class Main extends JavaPlugin implements Listener {
         p.setCompassTarget(locations[1]);
     }
 
-    public void endRound(Player p, Player winner) {
+    public void endRound(Player p, Player winner, boolean awardPoint, boolean endGame) {
+        if(!this.activeRound) {
+            return;
+        }
+
         String message = ChatColor.RED + "" + ChatColor.BOLD + winner.getDisplayName() + " has won this round!";
         this.hunter.sendMessage(message);
         this.not.sendMessage(message);
 
         this.getServer().getScheduler().cancelTasks(this);
         p.getWorld().getWorldBorder().reset();
+
+        UUID uuid = winner.getUniqueId();
+        int score = this.scores.get(uuid);
+
+        if(awardPoint) {
+            score += 1;
+            this.scores.put(uuid, score);
+        } else {
+            message = ChatColor.YELLOW + "" + ChatColor.BOLD + "Not awarding a point.";
+            this.hunter.sendMessage(message);
+            this.not.sendMessage(message);
+        }
+
+        message = "" + ChatColor.BLUE + ChatColor.BOLD + "Score:\n"
+                + this.hunter.getDisplayName() + ": " + this.scores.get(this.hunter.getUniqueId()) + "\n"
+                + ", " + this.not.getDisplayName() + ": " + this.scores.get(this.not.getUniqueId());
+        this.hunter.sendMessage(message);
+        this.not.sendMessage(message);
+
+        if(this.winScore == score) {
+            message = "" + ChatColor.RED + ChatColor.BOLD + winner.getDisplayName() + " has won this game!";
+            this.hunter.sendMessage(message);
+            this.not.sendMessage(message);
+            endGame = true;
+        }
+
+        this.activeRound = false;
+
+        if(endGame) {
+            this.endGame(p);
+        }
     }
 
-    public void endGame(Player p, Player winner) {
+    public void endGame(Player p) {
         this.inGame = false;
-        this.endRound(p, winner);
+        this.activeRound = false;
     }
 }
