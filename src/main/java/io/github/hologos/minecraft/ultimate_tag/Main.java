@@ -3,6 +3,7 @@ package io.github.hologos.minecraft.ultimate_tag;
 import java.util.UUID;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -30,9 +31,13 @@ public class Main extends JavaPlugin implements Listener {
     public FileConfiguration config;
 
     protected int playgroundSize;
+    protected int maxStartingDistance;
+    protected int minStartingDistance;
 
     public Main() {
         this.playgroundSize = 160;
+        this.minStartingDistance = 20;
+        this.maxStartingDistance = 60;
     }
 
     public void onEnable() {
@@ -73,8 +78,7 @@ public class Main extends JavaPlugin implements Listener {
             this.z = this.getRand();
             p.getWorld().getWorldBorder().setCenter((double)this.x, (double)this.z);
             p.getWorld().getWorldBorder().setSize(this.playgroundSize);
-            this.hunter.teleport(p.getWorld().getHighestBlockAt(this.x + 80 - 1, this.z + 80 - 1).getLocation());
-            this.not.teleport(p.getWorld().getHighestBlockAt(this.x + 80 - 1, this.z + 80 - 1).getLocation());
+            this.setPlayersPositions(p);
             this.not.getInventory().setContents(this.notInv);
             this.hunter.getInventory().setContents(this.hunterInv);
             this.getServer().getScheduler().runTaskLater(this, new Runnable() {
@@ -299,5 +303,44 @@ public class Main extends JavaPlugin implements Listener {
                 }
             }
         }
+    }
+
+    protected void setPlayersPositions(final Player p) {
+        Location[] locations = this.generatePlayersLocations(p);
+
+        this.hunter.teleport(locations[0]);
+        this.not.teleport(locations[1]);
+    }
+
+    protected Location[] generatePlayersLocations(final Player p) {
+        Location hl, tl;
+        double distance, x1, x2, z1, z2;
+
+        // fix hunter's location in place
+        hl = this.getRandomLocation(p);
+        x1 = hl.getX();
+        z1 = hl.getZ();
+
+        do {
+            tl = this.getRandomLocation(p);
+            x2 = tl.getX();
+            z2 = tl.getZ();
+            distance = Math.hypot(Math.abs(z2 - z1), Math.abs(x2 - x1));
+        } while (distance > this.maxStartingDistance || distance < this.minStartingDistance);
+
+        return new Location[] { hl, tl };
+    }
+
+    protected Location getRandomLocation(final Player p) {
+        int x = this.getRandomCoord(this.x);
+        int z = this.getRandomCoord(this.z);
+        Location location = p.getWorld().getHighestBlockAt(x, z).getLocation();
+        location.setY(location.getY() + 1); // fixes spawning in the ground
+
+        return location;
+    }
+
+    protected int getRandomCoord(int offset) {
+        return offset + ((int) (Math.random() * this.playgroundSize)) - (this.playgroundSize / 2) - 1;
     }
 }
