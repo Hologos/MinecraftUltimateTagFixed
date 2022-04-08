@@ -237,7 +237,7 @@ public class Main extends JavaPlugin implements Listener {
         this.notInv[2] = new ItemStack(Material.DIAMOND_SHOVEL, 1);
         this.notInv[3] = new ItemStack(Material.COBBLESTONE, 16);
         this.hunterInv = new ItemStack[5];
-        this.hunterInv[1] = new ItemStack(Material.COMPASS, 1);
+        this.hunterInv[0] = new ItemStack(Material.COMPASS, 1);
         this.hunterInv[1] = new ItemStack(Material.DIAMOND_PICKAXE, 1);
         this.hunterInv[2] = new ItemStack(Material.DIAMOND_AXE, 1);
         this.hunterInv[3] = new ItemStack(Material.DIAMOND_SHOVEL, 1);
