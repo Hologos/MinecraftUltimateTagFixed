@@ -65,139 +65,140 @@ public class Main extends JavaPlugin implements Listener {
     public void nextGame(final Player p, boolean test) {
         if (!this.inGame || p.getUniqueId() != this.hunter.getUniqueId() && p.getUniqueId() != this.not.getUniqueId()) {
             p.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "You are not in a game!\nUse /tag start <hunter> <target> to start a game!");
-        } else {
-            this.getServer().getScheduler().cancelTasks(this);
-            this.hunterNum = this.hunter.getUniqueId();
-            this.notNum = this.not.getUniqueId();
-            this.hunter = this.getServer().getPlayer(this.notNum);
-            this.not = this.getServer().getPlayer(this.hunterNum);
-            this.hunter.setHealth(20.0D);
-            this.not.setHealth(20.0D);
-            this.hunter.setFoodLevel(30);
-            this.not.setFoodLevel(30);
-            this.hunter.getInventory().setHeldItemSlot(4); // force to start with compass selected
-            this.x = this.getRand();
-            this.z = this.getRand();
-            p.getWorld().getWorldBorder().setCenter((double)this.x, (double)this.z);
-            p.getWorld().getWorldBorder().setSize(this.playgroundSize);
-            this.setPlayersPositions(p);
-            this.not.getInventory().setContents(this.notInv);
-            this.hunter.getInventory().setContents(this.hunterInv);
-
-            if(test) {
-                this.enableTest(p);
-            }
-
-            this.getServer().getScheduler().runTaskLater(this, new Runnable() {
-                public void run() {
-                    Main.this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "Start!");
-                    Main.this.not.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "Start!");
-                }
-            }, 0L);
-            this.getServer().getScheduler().runTaskLater(this, new Runnable() {
-                public void run() {
-                    Main.this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "1 Minute Left!");
-                    Main.this.not.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "1 Minute Left!");
-                }
-            }, 1200L);
-            this.getServer().getScheduler().runTaskLater(this, new Runnable() {
-                public void run() {
-                    Main.this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "30 Seconds Left!");
-                    Main.this.not.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "30 Seconds Left!");
-                }
-            }, 1800L);
-            this.getServer().getScheduler().runTaskLater(this, new Runnable() {
-                public void run() {
-                    Main.this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "15 Seconds Left!");
-                    Main.this.not.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "15 Seconds Left!");
-                }
-            }, 2100L);
-            this.getServer().getScheduler().runTaskLater(this, new Runnable() {
-                public void run() {
-                    Main.this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "10 Seconds Left!");
-                    Main.this.not.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "10 Seconds Left!");
-                }
-            }, 2200L);
-            this.getServer().getScheduler().runTaskLater(this, new Runnable() {
-                public void run() {
-                    Main.this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "9 Seconds Left!");
-                    Main.this.not.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "9 Seconds Left!");
-                }
-            }, 2220L);
-            this.getServer().getScheduler().runTaskLater(this, new Runnable() {
-                public void run() {
-                    Main.this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "8 Seconds Left!");
-                    Main.this.not.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "8 Seconds Left!");
-                }
-            }, 2240L);
-            this.getServer().getScheduler().runTaskLater(this, new Runnable() {
-                public void run() {
-                    Main.this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "7 Seconds Left!");
-                    Main.this.not.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "7 Seconds Left!");
-                }
-            }, 2260L);
-            this.getServer().getScheduler().runTaskLater(this, new Runnable() {
-                public void run() {
-                    Main.this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "6 Seconds Left!");
-                    Main.this.not.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "6 Seconds Left!");
-                }
-            }, 2280L);
-            this.getServer().getScheduler().runTaskLater(this, new Runnable() {
-                public void run() {
-                    Main.this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "5 Seconds Left!");
-                    Main.this.not.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "5 Seconds Left!");
-                }
-            }, 2300L);
-            this.getServer().getScheduler().runTaskLater(this, new Runnable() {
-                public void run() {
-                    Main.this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "4 Seconds Left!");
-                    Main.this.not.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "4 Seconds Left!");
-                }
-            }, 2320L);
-            this.getServer().getScheduler().runTaskLater(this, new Runnable() {
-                public void run() {
-                    Main.this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "3 Seconds Left!");
-                    Main.this.not.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "3 Seconds Left!");
-                }
-            }, 2340L);
-            this.getServer().getScheduler().runTaskLater(this, new Runnable() {
-                public void run() {
-                    Main.this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "2 Seconds Left!");
-                    Main.this.not.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "2 Seconds Left!");
-                }
-            }, 2360L);
-            this.getServer().getScheduler().runTaskLater(this, new Runnable() {
-                public void run() {
-                    Main.this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "1 Seconds Left!");
-                    Main.this.not.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "1 Seconds Left!");
-                }
-            }, 2380L);
-            this.getServer().getScheduler().runTaskLater(this, new Runnable() {
-                public void run() {
-                    Main.this.endRound(p, Main.this.not);
-                }
-            }, 2400L);
+            return;
         }
 
+        this.getServer().getScheduler().cancelTasks(this);
+        this.hunterNum = this.hunter.getUniqueId();
+        this.notNum = this.not.getUniqueId();
+        this.hunter = this.getServer().getPlayer(this.notNum);
+        this.not = this.getServer().getPlayer(this.hunterNum);
+        this.hunter.setHealth(20.0D);
+        this.not.setHealth(20.0D);
+        this.hunter.setFoodLevel(30);
+        this.not.setFoodLevel(30);
+        this.hunter.getInventory().setHeldItemSlot(4); // force to start with compass selected
+        this.x = this.getRand();
+        this.z = this.getRand();
+        p.getWorld().getWorldBorder().setCenter((double)this.x, (double)this.z);
+        p.getWorld().getWorldBorder().setSize(this.playgroundSize);
+        this.setPlayersPositions(p);
+        this.not.getInventory().setContents(this.notInv);
+        this.hunter.getInventory().setContents(this.hunterInv);
+
+        if(test) {
+            this.enableTest(p);
+        }
+
+        this.getServer().getScheduler().runTaskLater(this, new Runnable() {
+            public void run() {
+                Main.this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "Start!");
+                Main.this.not.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "Start!");
+            }
+        }, 0L);
+        this.getServer().getScheduler().runTaskLater(this, new Runnable() {
+            public void run() {
+                Main.this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "1 Minute Left!");
+                Main.this.not.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "1 Minute Left!");
+            }
+        }, 1200L);
+        this.getServer().getScheduler().runTaskLater(this, new Runnable() {
+            public void run() {
+                Main.this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "30 Seconds Left!");
+                Main.this.not.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "30 Seconds Left!");
+            }
+        }, 1800L);
+        this.getServer().getScheduler().runTaskLater(this, new Runnable() {
+            public void run() {
+                Main.this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "15 Seconds Left!");
+                Main.this.not.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "15 Seconds Left!");
+            }
+        }, 2100L);
+        this.getServer().getScheduler().runTaskLater(this, new Runnable() {
+            public void run() {
+                Main.this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "10 Seconds Left!");
+                Main.this.not.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "10 Seconds Left!");
+            }
+        }, 2200L);
+        this.getServer().getScheduler().runTaskLater(this, new Runnable() {
+            public void run() {
+                Main.this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "9 Seconds Left!");
+                Main.this.not.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "9 Seconds Left!");
+            }
+        }, 2220L);
+        this.getServer().getScheduler().runTaskLater(this, new Runnable() {
+            public void run() {
+                Main.this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "8 Seconds Left!");
+                Main.this.not.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "8 Seconds Left!");
+            }
+        }, 2240L);
+        this.getServer().getScheduler().runTaskLater(this, new Runnable() {
+            public void run() {
+                Main.this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "7 Seconds Left!");
+                Main.this.not.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "7 Seconds Left!");
+            }
+        }, 2260L);
+        this.getServer().getScheduler().runTaskLater(this, new Runnable() {
+            public void run() {
+                Main.this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "6 Seconds Left!");
+                Main.this.not.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "6 Seconds Left!");
+            }
+        }, 2280L);
+        this.getServer().getScheduler().runTaskLater(this, new Runnable() {
+            public void run() {
+                Main.this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "5 Seconds Left!");
+                Main.this.not.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "5 Seconds Left!");
+            }
+        }, 2300L);
+        this.getServer().getScheduler().runTaskLater(this, new Runnable() {
+            public void run() {
+                Main.this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "4 Seconds Left!");
+                Main.this.not.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "4 Seconds Left!");
+            }
+        }, 2320L);
+        this.getServer().getScheduler().runTaskLater(this, new Runnable() {
+            public void run() {
+                Main.this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "3 Seconds Left!");
+                Main.this.not.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "3 Seconds Left!");
+            }
+        }, 2340L);
+        this.getServer().getScheduler().runTaskLater(this, new Runnable() {
+            public void run() {
+                Main.this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "2 Seconds Left!");
+                Main.this.not.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "2 Seconds Left!");
+            }
+        }, 2360L);
+        this.getServer().getScheduler().runTaskLater(this, new Runnable() {
+            public void run() {
+                Main.this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "1 Seconds Left!");
+                Main.this.not.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "1 Seconds Left!");
+            }
+        }, 2380L);
+        this.getServer().getScheduler().runTaskLater(this, new Runnable() {
+            public void run() {
+                Main.this.endRound(p, Main.this.not);
+            }
+        }, 2400L);
     }
 
     @EventHandler
     public void onHit(EntityDamageByEntityEvent e) {
-        if (this.hunter != null) {
-            if (this.not != null) {
-                if (e.getEntity() instanceof Player) {
-                    if (e.getDamager() instanceof Player) {
-                        Player p = (Player)e.getEntity();
-                        Player d = (Player)e.getDamager();
-                        if (p.getUniqueId() == this.not.getUniqueId()) {
-                            if (d.getUniqueId() == this.hunter.getUniqueId()) {
-                                this.endRound(p, this.hunter);
-                            }
-                        }
-                    }
-                }
-            }
+        if (this.hunter == null || this.not == null) {
+            return;
         }
+
+        if (!(e.getEntity() instanceof Player) || !(e.getDamager() instanceof Player)) {
+            return;
+        }
+
+        Player p = (Player) e.getEntity();
+        Player d = (Player) e.getDamager();
+
+        if (p.getUniqueId() != this.not.getUniqueId() || d.getUniqueId() != this.hunter.getUniqueId()) {
+            return;
+        }
+
+        this.endRound(p, this.hunter);
     }
 
     public void helpMenu(Player p) {
@@ -210,30 +211,42 @@ public class Main extends JavaPlugin implements Listener {
     public void startGame(String h, String n, Player p, boolean test) {
         if (this.getServer().getPlayer(h) == null) {
             p.sendMessage("" + ChatColor.RED + ChatColor.BOLD + h + " is not a player!");
-        } else if (this.getServer().getPlayer(n) == null) {
-            p.sendMessage("" + ChatColor.RED + ChatColor.BOLD + n + " is not a player!");
-        } else {
-            this.hunter = this.getServer().getPlayer(n);
-            this.not = this.getServer().getPlayer(h);
-            this.inGame = true;
-            this.nextGame(p, test);
+            return;
         }
+
+        if (this.getServer().getPlayer(n) == null) {
+            p.sendMessage("" + ChatColor.RED + ChatColor.BOLD + n + " is not a player!");
+            return;
+        }
+
+        this.hunter = this.getServer().getPlayer(n);
+        this.not = this.getServer().getPlayer(h);
+        this.inGame = true;
+        this.nextGame(p, test);
     }
 
     @EventHandler
     public void onLeave(PlayerQuitEvent e) {
-        if (this.inGame) {
-            if (e.getPlayer().getUniqueId() == this.hunter.getUniqueId()) {
-                this.inGame = false;
-                return;
-            }
-
-            if (e.getPlayer().getUniqueId() == this.not.getUniqueId()) {
-                this.inGame = false;
-                return;
-            }
+        if(!this.inGame) {
+            return;
         }
 
+        if(this.hunter == null || this.not == null) {
+            return;
+        }
+
+        Player p = e.getPlayer();
+        UUID uuid = p.getUniqueId();
+
+        if (uuid != this.hunter.getUniqueId() && uuid != this.not.getUniqueId()) {
+            return;
+        }
+
+        if (uuid == this.hunter.getUniqueId()) {
+            this.endGame(p, this.not);
+        } else if (uuid == this.not.getUniqueId()) {
+            this.endGame(p, this.hunter);
+        }
     }
 
     public int getRand() {
@@ -256,49 +269,74 @@ public class Main extends JavaPlugin implements Listener {
 
     @EventHandler
     public void onDeath(EntityDeathEvent e) {
-        if (this.hunter != null) {
-            if (this.not != null) {
-                if (e.getEntity() instanceof Player) {
-                    Player p = (Player)e.getEntity();
-                    if (p.getUniqueId() == this.hunter.getUniqueId()) {
-                        this.endRound(p, this.not);
-                    } else {
-                        if (p.getUniqueId() == this.not.getUniqueId()) {
-                            this.endRound(p, this.hunter);
-                        }
+        if(!this.inGame) {
+            return;
+        }
 
-                    }
-                }
-            }
+        if(!(e.getEntity() instanceof Player)) {
+            return;
+        }
+
+        if(this.hunter == null || this.not == null) {
+            return;
+        }
+
+        Player p = (Player) e.getEntity();
+        UUID uuid = p.getUniqueId();
+
+        if (uuid == this.hunter.getUniqueId()) {
+            this.endRound(p, this.not);
+        } else if (uuid == this.not.getUniqueId()) {
+            this.endRound(p, this.hunter);
         }
     }
 
     @EventHandler
     public void onClick(PlayerInteractEvent e) {
-        if (this.hunter != null) {
-            if (this.not != null) {
-                if (e.getPlayer().getUniqueId() == this.hunter.getUniqueId()) {
-                    Player p = e.getPlayer();
-                    if (e.getMaterial() == Material.COMPASS) {
-                        if (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
-                            p.setCompassTarget(this.not.getLocation());
-                            p.sendMessage(ChatColor.RED + "Compass now pointing to " + this.not.getDisplayName() + ".  y=" + this.not.getLocation().getBlockY());
-                        }
-                    }
-                }
-            }
+        if(!this.inGame) {
+            return;
         }
+
+        if(this.hunter == null || this.not == null) {
+            return;
+        }
+
+        if (e.getMaterial() != Material.COMPASS) {
+            return;
+        }
+
+        Player p = e.getPlayer();
+
+        if (p.getUniqueId() != this.hunter.getUniqueId()) {
+            return;
+        }
+
+        if (e.getAction() != Action.RIGHT_CLICK_AIR && e.getAction() != Action.RIGHT_CLICK_BLOCK) {
+            return;
+        }
+
+        p.setCompassTarget(this.not.getLocation());
+        p.sendMessage(ChatColor.RED + "Compass now pointing to " + this.not.getDisplayName() + ".  y=" + this.not.getLocation().getBlockY());
     }
 
     @EventHandler
     public void onRespawn(PlayerRespawnEvent e) {
-        if (this.hunter != null) {
-            if (this.not != null) {
-                if (e.getPlayer().getUniqueId() == this.hunter.getUniqueId() || e.getPlayer().getUniqueId() == this.not.getUniqueId()) {
-                    e.setRespawnLocation(e.getPlayer().getWorld().getHighestBlockAt(this.x, this.z).getLocation());
-                }
-            }
+        if(!this.inGame) {
+            return;
         }
+
+        if(this.hunter == null || this.not == null) {
+            return;
+        }
+
+        Player p = e.getPlayer();
+        UUID uuid = p.getUniqueId();
+
+        if (uuid != this.hunter.getUniqueId() || uuid != this.not.getUniqueId()) {
+            return;
+        }
+
+        e.setRespawnLocation(p.getWorld().getHighestBlockAt(this.x, this.z).getLocation());
     }
 
     protected void setPlayersPositions(final Player p) {
@@ -378,5 +416,10 @@ public class Main extends JavaPlugin implements Listener {
 
         this.getServer().getScheduler().cancelTasks(this);
         p.getWorld().getWorldBorder().reset();
+    }
+
+    public void endGame(Player p, Player winner) {
+        this.inGame = false;
+        this.endRound(p, winner);
     }
 }
