@@ -362,7 +362,7 @@ public class Main extends JavaPlugin implements Listener {
         Location[] locations = this.generatePlayersLocations(p, true);
 
         this.hunter.teleport(locations[0]);
-        p.getWorld().spawnEntity(locations[1], EntityType.BOAT);
+        p.getWorld().spawnEntity(locations[1], EntityType.BLAZE);
         p.setCompassTarget(locations[1]);
     }
 }
