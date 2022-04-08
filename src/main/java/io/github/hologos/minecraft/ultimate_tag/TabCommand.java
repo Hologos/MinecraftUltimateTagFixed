@@ -15,6 +15,11 @@ public class TabCommand implements TabCompleter {
     public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args) {
         List<String> list = new ArrayList();
         if (sender instanceof Player) {
+            Player[] players;
+            Player p;
+            int var8;
+            int var9;
+            Player[] var10;
             if (args.length == 1) {
                 if (label.equalsIgnoreCase("tag")) {
                     list.clear();
@@ -33,11 +38,6 @@ public class TabCommand implements TabCompleter {
                     return list;
                 }
             } else if (args.length == 2) {
-                Player[] players;
-                Player p;
-                int var8;
-                int var9;
-                Player[] var10;
                 if (label.equalsIgnoreCase("tag")) {
                     if (args[0].equalsIgnoreCase("start")) {
                         list.clear();
@@ -55,22 +55,22 @@ public class TabCommand implements TabCompleter {
 
                         return list;
                     }
-                } else if (args.length == 3 && label.equalsIgnoreCase("tag") && args[0].equalsIgnoreCase("start")) {
-                    list.clear();
-                    players = new Player[Bukkit.getServer().getOnlinePlayers().size()];
-                    Bukkit.getServer().getOnlinePlayers().toArray(players);
-                    var10 = players;
-                    var9 = players.length;
-
-                    for(var8 = 0; var8 < var9; ++var8) {
-                        p = var10[var8];
-                        if (p.getDisplayName().toLowerCase().indexOf(args[2].toLowerCase()) == 0) {
-                            list.add(p.getDisplayName());
-                        }
-                    }
-
-                    return list;
                 }
+            } else if (args.length == 3 && label.equalsIgnoreCase("tag") && args[0].equalsIgnoreCase("start")) {
+                list.clear();
+                players = new Player[Bukkit.getServer().getOnlinePlayers().size()];
+                Bukkit.getServer().getOnlinePlayers().toArray(players);
+                var10 = players;
+                var9 = players.length;
+
+                for(var8 = 0; var8 < var9; ++var8) {
+                    p = var10[var8];
+                    if (p.getDisplayName().toLowerCase().indexOf(args[2].toLowerCase()) == 0) {
+                        list.add(p.getDisplayName());
+                    }
+                }
+
+                return list;
             }
         }
 
