@@ -197,9 +197,9 @@ public class Main extends JavaPlugin implements Listener {
 
     public void startGame(String h, String n, Player p) {
         if (this.getServer().getPlayer(h) == null) {
-            p.sendMessage("" + ChatColor.RED + ChatColor.BOLD + h + "is not a player!");
+            p.sendMessage("" + ChatColor.RED + ChatColor.BOLD + h + " is not a player!");
         } else if (this.getServer().getPlayer(n) == null) {
-            p.sendMessage("" + ChatColor.RED + ChatColor.BOLD + n + "is not a player!");
+            p.sendMessage("" + ChatColor.RED + ChatColor.BOLD + n + " is not a player!");
         } else {
             this.hunter = this.getServer().getPlayer(n);
             this.not = this.getServer().getPlayer(h);
