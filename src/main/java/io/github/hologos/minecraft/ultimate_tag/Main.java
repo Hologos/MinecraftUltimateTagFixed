@@ -99,81 +99,21 @@ public class Main extends JavaPlugin implements Listener {
             this.enableTest(p);
         }
 
-        this.getServer().getScheduler().runTaskLater(this, new Runnable() {
-            public void run() {
-                Main.this.announceMessage("" + ChatColor.RED + ChatColor.BOLD + "Start!");
-            }
-        }, 0L);
-        this.getServer().getScheduler().runTaskLater(this, new Runnable() {
-            public void run() {
-                Main.this.announceMessage("" + ChatColor.RED + ChatColor.BOLD + "1 Minute Left!");
-            }
-        }, 1200L);
-        this.getServer().getScheduler().runTaskLater(this, new Runnable() {
-            public void run() {
-                Main.this.announceMessage("" + ChatColor.RED + ChatColor.BOLD + "30 Seconds Left!");
-            }
-        }, 1800L);
-        this.getServer().getScheduler().runTaskLater(this, new Runnable() {
-            public void run() {
-                Main.this.announceMessage("" + ChatColor.RED + ChatColor.BOLD + "15 Seconds Left!");
-            }
-        }, 2100L);
-        this.getServer().getScheduler().runTaskLater(this, new Runnable() {
-            public void run() {
-                Main.this.announceMessage("" + ChatColor.RED + ChatColor.BOLD + "10 Seconds Left!");
-            }
-        }, 2200L);
-        this.getServer().getScheduler().runTaskLater(this, new Runnable() {
-            public void run() {
-                Main.this.announceMessage("" + ChatColor.RED + ChatColor.BOLD + "9 Seconds Left!");
-            }
-        }, 2220L);
-        this.getServer().getScheduler().runTaskLater(this, new Runnable() {
-            public void run() {
-                Main.this.announceMessage("" + ChatColor.RED + ChatColor.BOLD + "8 Seconds Left!");
-            }
-        }, 2240L);
-        this.getServer().getScheduler().runTaskLater(this, new Runnable() {
-            public void run() {
-                Main.this.announceMessage("" + ChatColor.RED + ChatColor.BOLD + "7 Seconds Left!");
-            }
-        }, 2260L);
-        this.getServer().getScheduler().runTaskLater(this, new Runnable() {
-            public void run() {
-                Main.this.announceMessage("" + ChatColor.RED + ChatColor.BOLD + "6 Seconds Left!");
-            }
-        }, 2280L);
-        this.getServer().getScheduler().runTaskLater(this, new Runnable() {
-            public void run() {
-                Main.this.announceMessage("" + ChatColor.RED + ChatColor.BOLD + "5 Seconds Left!");
-            }
-        }, 2300L);
-        this.getServer().getScheduler().runTaskLater(this, new Runnable() {
-            public void run() {
-                Main.this.announceMessage("" + ChatColor.RED + ChatColor.BOLD + "4 Seconds Left!");
-            }
-        }, 2320L);
-        this.getServer().getScheduler().runTaskLater(this, new Runnable() {
-            public void run() {
-                Main.this.announceMessage("" + ChatColor.RED + ChatColor.BOLD + "3 Seconds Left!");
-            }
-        }, 2340L);
-        this.getServer().getScheduler().runTaskLater(this, new Runnable() {
-            public void run() {
-                Main.this.announceMessage("" + ChatColor.RED + ChatColor.BOLD + "2 Seconds Left!");
-            }
-        }, 2360L);
-        this.getServer().getScheduler().runTaskLater(this, new Runnable() {
-            public void run() {
-                Main.this.announceMessage("" + ChatColor.RED + ChatColor.BOLD + "1 Seconds Left!");
-            }
-        }, 2380L);
-        this.getServer().getScheduler().runTaskLater(this, new Runnable() {
-            public void run() {
-                Main.this.endRound(p, Main.this.not, true, false);
-            }
-        }, 2400L);
+        this.createMessageTask("" + ChatColor.RED + ChatColor.BOLD + "Start!", 0);
+        this.createMessageTask("" + ChatColor.RED + ChatColor.BOLD + "1 Minute Left!", 60);
+        this.createMessageTask("" + ChatColor.RED + ChatColor.BOLD + "30 Seconds Left!", 60 + 30);
+        this.createMessageTask("" + ChatColor.RED + ChatColor.BOLD + "15 Seconds Left!", 60 + 45);
+        this.createMessageTask("" + ChatColor.RED + ChatColor.BOLD + "10 Seconds Left!", 60 + 50);
+        this.createMessageTask("" + ChatColor.RED + ChatColor.BOLD + "9 Seconds Left!", 60 + 51);
+        this.createMessageTask("" + ChatColor.RED + ChatColor.BOLD + "8 Seconds Left!", 60 + 52);
+        this.createMessageTask("" + ChatColor.RED + ChatColor.BOLD + "7 Seconds Left!", 60 + 53);
+        this.createMessageTask("" + ChatColor.RED + ChatColor.BOLD + "6 Seconds Left!", 60 + 54);
+        this.createMessageTask("" + ChatColor.RED + ChatColor.BOLD + "5 Seconds Left!", 60 + 55);
+        this.createMessageTask("" + ChatColor.RED + ChatColor.BOLD + "4 Seconds Left!", 60 + 56);
+        this.createMessageTask("" + ChatColor.RED + ChatColor.BOLD + "3 Seconds Left!", 60 + 57);
+        this.createMessageTask("" + ChatColor.RED + ChatColor.BOLD + "2 Seconds Left!", 60 + 58);
+        this.createMessageTask("" + ChatColor.RED + ChatColor.BOLD + "1 Seconds Left!", 60 + 59);
+        this.createEndGameTask(p,60 + 60);
     }
 
     @EventHandler
@@ -450,5 +390,25 @@ public class Main extends JavaPlugin implements Listener {
     protected void announceMessage(String message) {
         this.hunter.sendMessage(message);
         this.not.sendMessage(message);
+    }
+
+    protected long convertSecondsToTicks(int seconds) {
+        return 20L * seconds;
+    }
+
+    protected void createMessageTask(String message, int secondsDelay) {
+        this.getServer().getScheduler().runTaskLater(this, new Runnable() {
+            public void run() {
+                Main.this.announceMessage(message);
+            }
+        }, this.convertSecondsToTicks(secondsDelay));
+    }
+
+    private void createEndGameTask(Player p, int secondsDelay) {
+        this.getServer().getScheduler().runTaskLater(this, new Runnable() {
+            public void run() {
+                Main.this.endRound(p, Main.this.not, true, false);
+            }
+        }, this.convertSecondsToTicks(secondsDelay));
     }
 }
