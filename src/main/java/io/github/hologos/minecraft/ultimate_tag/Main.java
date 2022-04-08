@@ -6,6 +6,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -61,7 +62,7 @@ public class Main extends JavaPlugin implements Listener {
         System.out.println("Goodbye!");
     }
 
-    public void nextGame(final Player p) {
+    public void nextGame(final Player p, boolean test) {
         if (!this.inGame || p.getUniqueId() != this.hunter.getUniqueId() && p.getUniqueId() != this.not.getUniqueId()) {
             p.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "You are not in a game!\nUse /tag start <hunter> <target> to start a game!");
         } else {
@@ -81,6 +82,11 @@ public class Main extends JavaPlugin implements Listener {
             this.setPlayersPositions(p);
             this.not.getInventory().setContents(this.notInv);
             this.hunter.getInventory().setContents(this.hunterInv);
+
+            if(test) {
+                this.enableTest(p);
+            }
+
             this.getServer().getScheduler().runTaskLater(this, new Runnable() {
                 public void run() {
                     Main.this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "Start!");
@@ -205,7 +211,7 @@ public class Main extends JavaPlugin implements Listener {
             + ChatColor.RED + "-- /tag nextRound" + ChatColor.WHITE + " - starts next round");
     }
 
-    public void startGame(String h, String n, Player p) {
+    public void startGame(String h, String n, Player p, boolean test) {
         if (this.getServer().getPlayer(h) == null) {
             p.sendMessage("" + ChatColor.RED + ChatColor.BOLD + h + " is not a player!");
         } else if (this.getServer().getPlayer(n) == null) {
@@ -214,7 +220,7 @@ public class Main extends JavaPlugin implements Listener {
             this.hunter = this.getServer().getPlayer(n);
             this.not = this.getServer().getPlayer(h);
             this.inGame = true;
-            this.nextGame(p);
+            this.nextGame(p, test);
         }
     }
 
@@ -306,13 +312,13 @@ public class Main extends JavaPlugin implements Listener {
     }
 
     protected void setPlayersPositions(final Player p) {
-        Location[] locations = this.generatePlayersLocations(p);
+        Location[] locations = this.generatePlayersLocations(p, false);
 
         this.hunter.teleport(locations[0]);
         this.not.teleport(locations[1]);
     }
 
-    protected Location[] generatePlayersLocations(final Player p) {
+    protected Location[] generatePlayersLocations(final Player p, boolean test) {
         Location hl, tl;
         double distance, x1, x2, z1, z2;
 
@@ -321,11 +327,19 @@ public class Main extends JavaPlugin implements Listener {
         x1 = hl.getX();
         z1 = hl.getZ();
 
+        if(test) {
+            p.sendMessage("Hunter location: x=" + x1 + ", z=" + z1);
+        }
+
         do {
             tl = this.getRandomLocation(p);
             x2 = tl.getX();
             z2 = tl.getZ();
             distance = Math.hypot(Math.abs(z2 - z1), Math.abs(x2 - x1));
+
+            if(test) {
+                p.sendMessage("Target location: x=" + x2 + ", z=" + z2);
+            }
         } while (distance > this.maxStartingDistance || distance < this.minStartingDistance);
 
         return new Location[] { hl, tl };
@@ -342,5 +356,13 @@ public class Main extends JavaPlugin implements Listener {
 
     protected int getRandomCoord(int offset) {
         return offset + ((int) (Math.random() * this.playgroundSize)) - (this.playgroundSize / 2) - 1;
+    }
+
+    protected void enableTest(final Player p) {
+        Location[] locations = this.generatePlayersLocations(p, true);
+
+        this.hunter.teleport(locations[0]);
+        p.getWorld().spawnEntity(locations[1], EntityType.BOAT);
+        p.setCompassTarget(locations[1]);
     }
 }

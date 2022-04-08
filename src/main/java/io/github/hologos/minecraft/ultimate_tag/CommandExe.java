@@ -22,7 +22,12 @@ public class CommandExe implements CommandExecutor {
             Player player = (Player) sender;
             if (args.length == 1) {
                 if (args[0].equalsIgnoreCase("nextGame")) {
-                    this.plugin.nextGame(player);
+                    this.plugin.nextGame(player, false);
+                    return true;
+                }
+
+                if (args[0].equalsIgnoreCase("test")) {
+                    this.plugin.startGame(player.getName(), player.getName(), player, true);
                     return true;
                 }
 
@@ -33,7 +38,7 @@ public class CommandExe implements CommandExecutor {
             }
 
             if (args.length == 3 && args[0].equalsIgnoreCase("start")) {
-                this.plugin.startGame(args[1], args[2], player);
+                this.plugin.startGame(args[1], args[2], player, false);
                 return true;
             }
 
