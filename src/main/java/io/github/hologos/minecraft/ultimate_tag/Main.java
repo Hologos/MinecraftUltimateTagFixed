@@ -367,9 +367,9 @@ public class Main extends JavaPlugin implements Listener {
             this.announceMessage(ChatColor.YELLOW + "" + ChatColor.BOLD + "Not awarding a point.");
         }
 
-        this.announceMessage("" + ChatColor.BLUE + ChatColor.BOLD + "Score:\n"
-                + this.hunter.getDisplayName() + ": " + this.scores.get(this.hunter.getUniqueId()) + "\n"
-                + ", " + this.not.getDisplayName() + ": " + this.scores.get(this.not.getUniqueId()));
+        this.announceMessage("\n" + ChatColor.BLUE + ChatColor.BOLD + "=== Score ===\n"
+                + ChatColor.RED + this.hunter.getDisplayName() + ": " + this.scores.get(this.hunter.getUniqueId()) + "\n"
+                + ChatColor.GOLD + this.not.getDisplayName() + ": " + this.scores.get(this.not.getUniqueId()) + "\n \n");
 
         if(this.winScore == score) {
             this.announceMessage("" + ChatColor.RED + ChatColor.BOLD + winner.getDisplayName() + " has won this game!");
