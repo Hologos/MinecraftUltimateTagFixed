@@ -72,8 +72,8 @@ public class Main extends JavaPlugin implements Listener {
             p.getWorld().getWorldBorder().setSize(160.0D);
             this.hunter.teleport(p.getWorld().getHighestBlockAt(this.x + 80 - 1, this.z + 80 - 1).getLocation());
             this.not.teleport(p.getWorld().getHighestBlockAt(this.x + 80 - 1, this.z + 80 - 1).getLocation());
-            this.hunter.getInventory().setContents(this.hunterInv);
             this.not.getInventory().setContents(this.notInv);
+            this.hunter.getInventory().setContents(this.hunterInv);
             this.getServer().getScheduler().runTaskLater(this, new Runnable() {
                 public void run() {
                     Main.this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "Start!");
