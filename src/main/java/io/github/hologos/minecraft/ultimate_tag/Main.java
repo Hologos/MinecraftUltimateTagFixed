@@ -101,86 +101,72 @@ public class Main extends JavaPlugin implements Listener {
 
         this.getServer().getScheduler().runTaskLater(this, new Runnable() {
             public void run() {
-                Main.this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "Start!");
-                Main.this.not.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "Start!");
+                Main.this.announceMessage("" + ChatColor.RED + ChatColor.BOLD + "Start!");
             }
         }, 0L);
         this.getServer().getScheduler().runTaskLater(this, new Runnable() {
             public void run() {
-                Main.this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "1 Minute Left!");
-                Main.this.not.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "1 Minute Left!");
+                Main.this.announceMessage("" + ChatColor.RED + ChatColor.BOLD + "1 Minute Left!");
             }
         }, 1200L);
         this.getServer().getScheduler().runTaskLater(this, new Runnable() {
             public void run() {
-                Main.this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "30 Seconds Left!");
-                Main.this.not.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "30 Seconds Left!");
+                Main.this.announceMessage("" + ChatColor.RED + ChatColor.BOLD + "30 Seconds Left!");
             }
         }, 1800L);
         this.getServer().getScheduler().runTaskLater(this, new Runnable() {
             public void run() {
-                Main.this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "15 Seconds Left!");
-                Main.this.not.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "15 Seconds Left!");
+                Main.this.announceMessage("" + ChatColor.RED + ChatColor.BOLD + "15 Seconds Left!");
             }
         }, 2100L);
         this.getServer().getScheduler().runTaskLater(this, new Runnable() {
             public void run() {
-                Main.this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "10 Seconds Left!");
-                Main.this.not.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "10 Seconds Left!");
+                Main.this.announceMessage("" + ChatColor.RED + ChatColor.BOLD + "10 Seconds Left!");
             }
         }, 2200L);
         this.getServer().getScheduler().runTaskLater(this, new Runnable() {
             public void run() {
-                Main.this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "9 Seconds Left!");
-                Main.this.not.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "9 Seconds Left!");
+                Main.this.announceMessage("" + ChatColor.RED + ChatColor.BOLD + "9 Seconds Left!");
             }
         }, 2220L);
         this.getServer().getScheduler().runTaskLater(this, new Runnable() {
             public void run() {
-                Main.this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "8 Seconds Left!");
-                Main.this.not.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "8 Seconds Left!");
+                Main.this.announceMessage("" + ChatColor.RED + ChatColor.BOLD + "8 Seconds Left!");
             }
         }, 2240L);
         this.getServer().getScheduler().runTaskLater(this, new Runnable() {
             public void run() {
-                Main.this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "7 Seconds Left!");
-                Main.this.not.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "7 Seconds Left!");
+                Main.this.announceMessage("" + ChatColor.RED + ChatColor.BOLD + "7 Seconds Left!");
             }
         }, 2260L);
         this.getServer().getScheduler().runTaskLater(this, new Runnable() {
             public void run() {
-                Main.this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "6 Seconds Left!");
-                Main.this.not.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "6 Seconds Left!");
+                Main.this.announceMessage("" + ChatColor.RED + ChatColor.BOLD + "6 Seconds Left!");
             }
         }, 2280L);
         this.getServer().getScheduler().runTaskLater(this, new Runnable() {
             public void run() {
-                Main.this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "5 Seconds Left!");
-                Main.this.not.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "5 Seconds Left!");
+                Main.this.announceMessage("" + ChatColor.RED + ChatColor.BOLD + "5 Seconds Left!");
             }
         }, 2300L);
         this.getServer().getScheduler().runTaskLater(this, new Runnable() {
             public void run() {
-                Main.this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "4 Seconds Left!");
-                Main.this.not.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "4 Seconds Left!");
+                Main.this.announceMessage("" + ChatColor.RED + ChatColor.BOLD + "4 Seconds Left!");
             }
         }, 2320L);
         this.getServer().getScheduler().runTaskLater(this, new Runnable() {
             public void run() {
-                Main.this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "3 Seconds Left!");
-                Main.this.not.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "3 Seconds Left!");
+                Main.this.announceMessage("" + ChatColor.RED + ChatColor.BOLD + "3 Seconds Left!");
             }
         }, 2340L);
         this.getServer().getScheduler().runTaskLater(this, new Runnable() {
             public void run() {
-                Main.this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "2 Seconds Left!");
-                Main.this.not.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "2 Seconds Left!");
+                Main.this.announceMessage("" + ChatColor.RED + ChatColor.BOLD + "2 Seconds Left!");
             }
         }, 2360L);
         this.getServer().getScheduler().runTaskLater(this, new Runnable() {
             public void run() {
-                Main.this.hunter.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "1 Seconds Left!");
-                Main.this.not.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "1 Seconds Left!");
+                Main.this.announceMessage("" + ChatColor.RED + ChatColor.BOLD + "1 Seconds Left!");
             }
         }, 2380L);
         this.getServer().getScheduler().runTaskLater(this, new Runnable() {
@@ -393,8 +379,7 @@ public class Main extends JavaPlugin implements Listener {
                 message = ChatColor.GREEN + "" + ChatColor.BOLD + "Suitable location found.";
             }
 
-            this.hunter.sendMessage(message);
-            this.not.sendMessage(message);
+            this.announceMessage(message);
         } while (unsatisfactoryDistance);
 
         return new Location[] { hl, tl };
@@ -426,9 +411,7 @@ public class Main extends JavaPlugin implements Listener {
             return;
         }
 
-        String message = ChatColor.RED + "" + ChatColor.BOLD + winner.getDisplayName() + " has won this round!";
-        this.hunter.sendMessage(message);
-        this.not.sendMessage(message);
+        this.announceMessage(ChatColor.RED + "" + ChatColor.BOLD + winner.getDisplayName() + " has won this round!");
 
         this.getServer().getScheduler().cancelTasks(this);
         p.getWorld().getWorldBorder().reset();
@@ -440,21 +423,15 @@ public class Main extends JavaPlugin implements Listener {
             score += 1;
             this.scores.put(uuid, score);
         } else {
-            message = ChatColor.YELLOW + "" + ChatColor.BOLD + "Not awarding a point.";
-            this.hunter.sendMessage(message);
-            this.not.sendMessage(message);
+            this.announceMessage(ChatColor.YELLOW + "" + ChatColor.BOLD + "Not awarding a point.");
         }
 
-        message = "" + ChatColor.BLUE + ChatColor.BOLD + "Score:\n"
+        this.announceMessage("" + ChatColor.BLUE + ChatColor.BOLD + "Score:\n"
                 + this.hunter.getDisplayName() + ": " + this.scores.get(this.hunter.getUniqueId()) + "\n"
-                + ", " + this.not.getDisplayName() + ": " + this.scores.get(this.not.getUniqueId());
-        this.hunter.sendMessage(message);
-        this.not.sendMessage(message);
+                + ", " + this.not.getDisplayName() + ": " + this.scores.get(this.not.getUniqueId()));
 
         if(this.winScore == score) {
-            message = "" + ChatColor.RED + ChatColor.BOLD + winner.getDisplayName() + " has won this game!";
-            this.hunter.sendMessage(message);
-            this.not.sendMessage(message);
+            this.announceMessage("" + ChatColor.RED + ChatColor.BOLD + winner.getDisplayName() + " has won this game!");
             endGame = true;
         }
 
@@ -468,5 +445,10 @@ public class Main extends JavaPlugin implements Listener {
     public void endGame(Player p) {
         this.inGame = false;
         this.activeRound = false;
+    }
+
+    protected void announceMessage(String message) {
+        this.hunter.sendMessage(message);
+        this.not.sendMessage(message);
     }
 }
