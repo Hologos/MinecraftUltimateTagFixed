@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.github.hologos</groupId>
-    <artifactId>minecraft-ultimate-tag-fixed-bukkit</artifactId>
+    <artifactId>minecraft-ultimate-tag-fixed</artifactId>
     <version>1.1</version>
 
     <properties>
