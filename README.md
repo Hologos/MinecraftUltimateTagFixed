@@ -12,4 +12,4 @@ I tried not to touch a lot of code so the diffs are easier to see but I think th
 
 1. Clone the repo.
 2. `mvn clean build`
-3. Upload plugin located in `target/minecraft-ultimate-tag-fixed-bukkit-1.0.jar` folder.
+3. Upload plugin located in `target/minecraft-ultimate-tag-fixed-bukkit-1.0-2.jar` folder.
