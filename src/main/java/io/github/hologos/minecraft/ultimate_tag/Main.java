@@ -90,13 +90,14 @@ public class Main extends JavaPlugin implements Listener {
         this.z = this.getRand();
         p.getWorld().getWorldBorder().setCenter((double)this.x, (double)this.z);
         p.getWorld().getWorldBorder().setSize(this.playgroundSize);
-        this.setPlayersPositions(p);
         this.not.getInventory().setContents(this.notInv);
         this.hunter.getInventory().setContents(this.hunterInv);
         this.activeRound = true;
 
-        if(test) {
-            this.enableTest(p);
+        if(!test) {
+            this.setPlayersPositions(p);
+        } else {
+            this.setTestPositions(p);
         }
 
         this.createMessageTask("" + ChatColor.RED + ChatColor.BOLD + "Start!", 0);
@@ -338,7 +339,7 @@ public class Main extends JavaPlugin implements Listener {
         return offset + ((int) (Math.random() * this.playgroundSize)) - (this.playgroundSize / 2) - 1;
     }
 
-    protected void enableTest(final Player p) {
+    protected void setTestPositions(final Player p) {
         Location[] locations = this.generatePlayersLocations(p, true);
 
         this.hunter.teleport(locations[0]);
