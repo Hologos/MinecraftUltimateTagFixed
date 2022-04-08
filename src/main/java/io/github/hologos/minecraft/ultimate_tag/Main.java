@@ -73,8 +73,8 @@ public class Main extends JavaPlugin implements Listener {
             this.not = this.getServer().getPlayer(this.hunterNum);
             this.hunter.setHealth(20.0D);
             this.not.setHealth(20.0D);
-            this.hunter.setFoodLevel(20);
-            this.not.setFoodLevel(20);
+            this.hunter.setFoodLevel(30);
+            this.not.setFoodLevel(30);
             this.x = this.getRand();
             this.z = this.getRand();
             p.getWorld().getWorldBorder().setCenter((double)this.x, (double)this.z);
