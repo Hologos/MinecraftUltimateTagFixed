@@ -88,19 +88,11 @@ public class Main extends JavaPlugin implements Listener {
         this.hunter.setFoodLevel(30);
         this.not.setFoodLevel(30);
         this.hunter.getInventory().setHeldItemSlot(4); // force to start with compass selected
-        this.x = this.getRand();
-        this.z = this.getRand();
-        p.getWorld().getWorldBorder().setCenter((double)this.x, (double)this.z);
-        p.getWorld().getWorldBorder().setSize(this.playgroundSize);
         this.not.getInventory().setContents(this.notInv);
         this.hunter.getInventory().setContents(this.hunterInv);
         this.activeRound = true;
 
-        if(!test) {
-            this.setPlayersPositions(p);
-        } else {
-            this.setTestPositions(p);
-        }
+        this.preparePlayground(p, test);
 
         this.createMessageTask("" + ChatColor.RED + ChatColor.BOLD + "Start!", 0);
         this.createMessageTask("" + ChatColor.RED + ChatColor.BOLD + "1 Minute Left!", 60);
@@ -420,5 +412,20 @@ public class Main extends JavaPlugin implements Listener {
                 Main.this.endRound(p, Main.this.not, true, false);
             }
         }, this.convertSecondsToTicks(secondsDelay));
+    }
+
+    protected void preparePlayground(Player p, boolean test) {
+        this.x = this.getRand();
+        this.z = this.getRand();
+
+        p.getWorld().getWorldBorder().setCenter((double)this.x, (double)this.z);
+        p.getWorld().getWorldBorder().setSize(this.playgroundSize);
+
+
+        if(!test) {
+            this.setPlayersPositions(p);
+        } else {
+            this.setTestPositions(p);
+        }
     }
 }
