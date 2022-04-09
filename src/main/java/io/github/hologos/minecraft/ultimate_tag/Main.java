@@ -275,7 +275,10 @@ public class Main extends JavaPlugin implements Listener {
             return;
         }
 
-        e.setRespawnLocation(p.getWorld().getHighestBlockAt(this.x, this.z).getLocation());
+        Location respawnLocation = p.getWorld().getHighestBlockAt(this.x, this.z).getLocation();
+        e.setRespawnLocation(respawnLocation);
+        p.getServer().broadcastMessage("DEBUG: Respawning " + p.getDisplayName()
+                + " at x= " + respawnLocation.getX() + ", y=" + respawnLocation.getY() + ", z=" + respawnLocation.getZ());
     }
 
     protected void setPlayersPositions(final Player p) {
