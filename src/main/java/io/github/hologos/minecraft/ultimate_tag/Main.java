@@ -38,6 +38,7 @@ public class Main extends JavaPlugin implements Listener {
     protected int minStartingDistance;
 
     protected int winScore;
+    protected int winDifference;
     protected boolean activeRound;
 
     protected Map<UUID, Integer> scores = new HashMap<>();
@@ -46,7 +47,8 @@ public class Main extends JavaPlugin implements Listener {
         this.playgroundSize = 160;
         this.minStartingDistance = 20;
         this.maxStartingDistance = 60;
-        this.winScore = 5;
+        this.winScore = 3;
+        this.winDifference = 2;
     }
 
     public void onEnable() {
@@ -317,7 +319,7 @@ public class Main extends JavaPlugin implements Listener {
             }
 
             if(satisfactoryDistance) {
-                this.announceMessage(ChatColor.GREEN + "" + ChatColor.BOLD + "Suitable location found (distance = " + distance + ").");
+                this.announceMessage(ChatColor.GREEN + "" + ChatColor.BOLD + "Suitable location found (distance = " + ((int) distance) + ").");
             }
         } while (!satisfactoryDistance);
 
@@ -350,8 +352,6 @@ public class Main extends JavaPlugin implements Listener {
             return;
         }
 
-        this.announceMessage(ChatColor.RED + "" + ChatColor.BOLD + winner.getDisplayName() + " has won this round!");
-
         this.getServer().getScheduler().cancelTasks(this);
         p.getWorld().getWorldBorder().reset();
 
@@ -365,14 +365,25 @@ public class Main extends JavaPlugin implements Listener {
             this.announceMessage(ChatColor.YELLOW + "" + ChatColor.BOLD + "Not awarding a point.");
         }
 
-        this.announceMessage("\n" + ChatColor.BLUE + ChatColor.BOLD + "=== Score ===\n"
-                + ChatColor.RED + this.hunter.getDisplayName() + ": " + this.scores.get(this.hunter.getUniqueId()) + "\n"
-                + ChatColor.GOLD + this.not.getDisplayName() + ": " + this.scores.get(this.not.getUniqueId()) + "\n \n");
+        int scoreHunter = this.scores.get(this.hunter.getUniqueId());
+        int scoreNot = this.scores.get(this.not.getUniqueId());
 
-        if(this.winScore == score) {
+        if(score >= this.winScore && Math.abs(scoreHunter - scoreNot) >= this.winDifference) {
+            this.announceMessage(" ");
+            this.announceMessage(" ");
+            this.announceMessage(" ");
             this.announceMessage("" + ChatColor.RED + ChatColor.BOLD + winner.getDisplayName() + " has won this game!");
             endGame = true;
+        } else {
+            this.announceMessage(" ");
+            this.announceMessage(" ");
+            this.announceMessage(ChatColor.RED + "" + ChatColor.BOLD + winner.getDisplayName() + " has won this round!");
         }
+
+        this.announceMessage(" ");
+        this.announceMessage("\n" + ChatColor.BLUE + ChatColor.BOLD + "=== Score ===\n"
+                + ChatColor.RED + this.hunter.getDisplayName() + ": " + scoreHunter + "\n"
+                + ChatColor.GOLD + this.not.getDisplayName() + ": " + scoreNot + "\n \n");
 
         this.activeRound = false;
 
