@@ -271,7 +271,7 @@ public class Main extends JavaPlugin implements Listener {
         Player p = e.getPlayer();
         UUID uuid = p.getUniqueId();
 
-        if (uuid != this.hunter.getUniqueId() || uuid != this.not.getUniqueId()) {
+        if (uuid != this.hunter.getUniqueId() && uuid != this.not.getUniqueId()) {
             return;
         }
 
