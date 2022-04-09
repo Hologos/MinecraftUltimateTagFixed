@@ -224,7 +224,7 @@ public class Main extends JavaPlugin implements Listener {
         UUID uuid = p.getUniqueId();
 
         if (uuid == this.hunter.getUniqueId()) {
-            this.endRound(p, this.not, false, false);
+            this.endRound(p, this.not, true, false);
         } else if (uuid == this.not.getUniqueId()) {
             this.endRound(p, this.hunter, true, false);
         }
