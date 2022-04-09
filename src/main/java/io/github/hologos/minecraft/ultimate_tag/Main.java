@@ -182,9 +182,9 @@ public class Main extends JavaPlugin implements Listener {
         }
 
         if (uuid == this.hunter.getUniqueId()) {
-            this.endRound(p, this.not, true, true);
+            this.endRound(p, this.not, true, false);
         } else if (uuid == this.not.getUniqueId()) {
-            this.endRound(p, this.hunter, true, true);
+            this.endRound(p, this.hunter, true, false);
         }
     }
 
