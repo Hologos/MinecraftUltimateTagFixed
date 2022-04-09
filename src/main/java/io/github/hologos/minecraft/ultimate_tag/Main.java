@@ -302,6 +302,8 @@ public class Main extends JavaPlugin implements Listener {
             p.sendMessage("Hunter location: x=" + x1 + ", z=" + z1);
         }
 
+        this.announceMessage(ChatColor.RED + "" + ChatColor.BOLD + "Searching for positions not too close and not too far. Expect lag!");
+
         do {
             tl = this.getRandomLocation(p);
             x2 = tl.getX();
@@ -314,16 +316,9 @@ public class Main extends JavaPlugin implements Listener {
                 p.sendMessage("Target location: x=" + x2 + ", z=" + z2);
             }
 
-            String message;
-
-            if(unsatisfactoryDistance) {
-                message = ChatColor.RED + "" + ChatColor.BOLD + "Not suitable target's location ("+ this.minStartingDistance
-                        +" < " + ((int) distance) + " < "+ this.maxStartingDistance +") - generating new one.";
-            } else {
-                message = ChatColor.GREEN + "" + ChatColor.BOLD + "Suitable location found.";
+            if(!unsatisfactoryDistance) {
+                this.announceMessage(ChatColor.GREEN + "" + ChatColor.BOLD + "Suitable location found (distance = " + distance + ").");
             }
-
-            this.announceMessage(message);
         } while (unsatisfactoryDistance);
 
         return new Location[] { hl, tl };
