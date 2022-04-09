@@ -291,7 +291,7 @@ public class Main extends JavaPlugin implements Listener {
     protected Location[] generatePlayersLocations(final Player p, boolean test) {
         Location hl, tl;
         double distance, x1, x2, z1, z2;
-        boolean unsatisfactoryDistance;
+        boolean satisfactoryDistance;
 
         // fix hunter's location in place
         hl = this.getRandomLocation(p);
@@ -310,16 +310,16 @@ public class Main extends JavaPlugin implements Listener {
             z2 = tl.getZ();
             distance = Math.hypot(Math.abs(z2 - z1), Math.abs(x2 - x1));
 
-            unsatisfactoryDistance = distance > this.maxStartingDistance || distance < this.minStartingDistance;
+            satisfactoryDistance = distance < this.maxStartingDistance && distance > this.minStartingDistance;
 
             if(test) {
                 p.sendMessage("Target location: x=" + x2 + ", z=" + z2);
             }
 
-            if(!unsatisfactoryDistance) {
+            if(satisfactoryDistance) {
                 this.announceMessage(ChatColor.GREEN + "" + ChatColor.BOLD + "Suitable location found (distance = " + distance + ").");
             }
-        } while (unsatisfactoryDistance);
+        } while (!satisfactoryDistance);
 
         return new Location[] { hl, tl };
     }
